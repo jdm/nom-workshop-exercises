@@ -35,6 +35,19 @@ impl FromStr for Pixel {
     }
 }
 
+// We need a parser that recognizes the image header,
+// ignores any comments that it contains (lines starting with #)
+// then determines the width and height.
+//
+// Finally, we can parse an appropriate number of 1/0 pixels based
+// on these width and height values.
+
+// Useful parsers/combinators:
+// * count!(parser, N) (apply a parser N times)
+// * alt!(parser_a | parser_b) (apply one of parser_a or parser_b)
+// * many0!(parser) (apply parser zero or more times)
+// * take_until_and_consume!("string") (consume the input until a string is matched)
+
 named!(image<&[u8], Vec<Vec<Pixel>>>,
        /* finish me */
        do_parse!(tag!("P1") >> (vec![])));
