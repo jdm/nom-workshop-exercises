@@ -1,0 +1,7 @@
+[package]
+name = "ingredients-parser"
+version = "0.1.0"
+authors = ["Josh Matthews <josh@joshmatthews.net>"]
+
+[dependencies]
+nom = "3.0"
