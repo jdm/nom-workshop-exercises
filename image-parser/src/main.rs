@@ -3,7 +3,7 @@ extern crate nom;
 
 use std::str::FromStr;
 
-static INPUT: &str = r#"P1
+static INPUT: &str = br#"P1
 # This is an example bitmap of the letter "J"
 6 10
 0 0 0 0 1 0
@@ -36,8 +36,9 @@ impl FromStr for Pixel {
 }
 
 named!(image<&[u8], Vec<Vec<Pixel>>>,
-       /* finish me */);
+       /* finish me */
+       do_parse!(tag!("P1") >> (vec![])));
 
 fn main() {
-    println!("{:?}", image(INPUT.as_bytes()));
+    println!("{:?}", image(INPUT));
 }
