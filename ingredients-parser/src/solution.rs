@@ -50,18 +50,24 @@ named!(unit_amount<&[u8], (f32, Unit)>,
 named!(ingredient_name<&[u8], &str>,
        map_res!(take_until_and_consume!("\n"), str::from_utf8));
 
-named!(ingredient<&[u8], ((f32, Unit), &str)>,
+named!(ingredient<&[u8], (f32, Unit, &str)>,
        do_parse!(
            unit_amount: unit_amount >>
            space >>
            tag!("of") >>
            space >>
            ingredient_name: ingredient_name >>
-           (unit_amount, ingredient_name)));
+           (unit_amount.0, unit_amount.1, ingredient_name)));
 
-named!(ingredients<&[u8], Vec<((f32, Unit), &str)>>,
+named!(ingredients<&[u8], Vec<(f32, Unit, &str)>>,
        many1!(ingredient));
 
+static INPUT: &[u8] = br#"3.5 cups of flour
+3 cups of coconut milk
+0.5 mg of chili powder
+10 tablespoons of salt
+"#;
+
 fn main() {
-    println!("{:?}", ingredients(b"3.5 cups of flour\n3 cups of coconut milk\n"));
+    println!("{:?}", ingredients(INPUT));
 }

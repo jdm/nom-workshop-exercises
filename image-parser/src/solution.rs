@@ -64,8 +64,6 @@ named!(size<&[u8], usize>,
            map_res!(digit, str::from_utf8),
            str::parse));
 
-named!(space_or_newline, alt!(tag!(" ") | tag!("\n")));
-
 named!(pixels<&[u8], Vec<Vec<Pixel>>>,
        do_parse!(
            width: size >>
@@ -73,7 +71,7 @@ named!(pixels<&[u8], Vec<Vec<Pixel>>>,
            height: size >>
            newline >>
            rows: count!(
-               count!(do_parse!(pixel: pixel >> space >> (pixel)), width),
+               count!(ws!(pixel), width),
                height) >>
                (rows)));
 
