@@ -3,7 +3,7 @@ extern crate nom;
 
 use std::str::FromStr;
 
-static INPUT: &str = br#"P1
+static INPUT: &[u8] = br#"P1
 # This is an example bitmap of the letter "J"
 6 10
 0 0 0 0 1 0
